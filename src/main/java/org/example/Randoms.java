@@ -27,29 +27,22 @@ public class Randoms implements Iterable<Integer> {
 
     @Override
     public Iterator<Integer> iterator() {
-        return new TodoIterator(this);
-    }
+        return new Iterator<Integer>() {
+            @Override
+            public boolean hasNext() {
+                return true;
+            }
 
-    public static class TodoIterator implements Iterator<Integer> {
-        protected Randoms target;
+            @Override
+            public Integer next() {
+                int diff = getMax() - getMin();
+                return getRandom().nextInt(diff + 1) + getMin();
+            }
 
-        public TodoIterator(Randoms target) {
-            this.target = target;
-        }
+            @Override
+            public void remove() {
 
-        @Override
-        public boolean hasNext() {
-            return true;
-        }
-
-        @Override
-        public Integer next() {
-            int diff = target.getMax() - target.getMin();
-            return  target.getRandom().nextInt(diff + 1) + target.getMin();
-        }
-
-        @Override
-        public void remove() {
-        }
+            }
+        };
     }
 }
